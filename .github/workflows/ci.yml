@@ -19,6 +19,23 @@ jobs:
     name: Calidad
     runs-on: ubuntu-24.04
     timeout-minutes: 10
+    services:
+      postgres:
+        image: postgres:18
+        env:
+          POSTGRES_DB: inflacion_lab_test
+          POSTGRES_PASSWORD: postgres
+          POSTGRES_USER: postgres
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U postgres -d inflacion_lab_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+    env:
+      TEST_DATABASE_URL: postgresql+psycopg://postgres:postgres@localhost:5432/inflacion_lab_test
+      DATABASE_URL_MIGRATIONS: postgresql+psycopg://postgres:postgres@localhost:5432/inflacion_lab_test
     steps:
       - name: Descargar repositorio
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
@@ -36,3 +53,5 @@ jobs:
         run: make check
       - name: Ejecutar pruebas unitarias
         run: make test
+      - name: Ejecutar pruebas de integración
+        run: make test-db
