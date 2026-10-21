@@ -34,9 +34,10 @@ archivos; revisa los cambios y vuelve a ejecutar la verificación.
 
 ## Colaboración
 
-El flujo es `rama de trabajo → pull request → revisión y CI → squash merge`.
-`main` requiere una aprobación de otra persona, el check `Calidad` y las
-conversaciones resueltas. Las reglas también aplican a administradores.
+El flujo es `rama de trabajo → pull request → CI → squash merge`.
+`main` requiere un pull request, el check `Calidad` y las conversaciones
+resueltas. La revisión de otra persona es opcional, por lo que puedes integrar
+tus propios pull requests. Las reglas también aplican a administradores.
 
 Consulta [CONTRIBUTING.md](CONTRIBUTING.md) para conocer los comandos, las reglas
 de protección y su configuración en GitHub.

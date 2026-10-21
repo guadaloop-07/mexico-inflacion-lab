@@ -28,10 +28,10 @@
    ```
 
 5. Abre un pull request hacia `main`, explica el resultado y su validación.
-6. Obtén una aprobación de otra persona con permisos de escritura, resuelve las
-   conversaciones y espera el check `Calidad`. Si `main` avanzó, actualiza tu
-   rama y espera las verificaciones nuevamente. Los cambios de código pueden
-   invalidar aprobaciones previas.
+6. Espera el check `Calidad` y resuelve las conversaciones de revisión que existan.
+   Si `main` avanzó, actualiza tu rama y espera las verificaciones nuevamente.
+   La revisión de otra persona es opcional; puedes integrar tus propios pull
+   requests cuando cumplan las verificaciones.
 7. Integra mediante squash merge. GitHub elimina la rama remota integrada.
 
 ## Hooks y CI
@@ -67,8 +67,7 @@ las acciones mediante pull requests.
 
 La configuración versionada establece:
 
-- Pull request obligatorio y una aprobación de otra persona.
-- Invalidación de aprobaciones cuando cambie el contenido revisado.
+- Pull request obligatorio, con cero aprobaciones externas requeridas.
 - Check `Calidad` de GitHub Actions aprobado y rama actualizada respecto de `main`.
 - Conversaciones de revisión resueltas e historial lineal.
 - Protección para administradores; force push y eliminación de `main` bloqueados.
@@ -84,9 +83,8 @@ gh api --method PUT repos/guadaloop-07/mexico-inflacion-lab/branches/main/protec
   --input .github/main-protection.json
 ```
 
-El autor de un pull request no puede aprobar su propio cambio. La revisión de un
-compañero con permisos de escritura es necesaria para integrar también el PR
-inicial de configuración.
+Puedes integrar tus propios pull requests una vez que se cumplan los checks y
+las demás reglas de protección. La aprobación de otra persona es opcional.
 
 ## Archivos locales
 
