@@ -5,8 +5,19 @@ series históricas y comparaciones regionales que ayudan a entender cómo cambia
 los precios.
 
 El proyecto está en su etapa inicial. Este repositorio contiene la configuración
-de colaboración y calidad; el ETL, la API y el dashboard se incorporarán en
-cambios posteriores.
+de colaboración y calidad y el [plan de ejecución](docs/plan/README.md); el ETL,
+la API y el dashboard se incorporarán mediante las tareas de ese plan.
+
+## Plan de desarrollo
+
+La primera carga del ETL incorporará las 792 series del catálogo: México, las
+32 entidades y 55 ciudades, con índice general y ocho rubros por ubicación.
+La API y la interfaz se construirán por entregas sobre esa base completa.
+
+El plan incluye arquitectura, contratos de datos y métricas, API, interfaz,
+operación y 17 tareas con dependencias y criterios de aceptación. Para ejecutar
+una tarea con otro modelo, usa el [prompt de trabajo](docs/plan/ejecucion.md) y
+consulta el [seguimiento](docs/plan/seguimiento.md).
 
 ## Preparar el entorno
 

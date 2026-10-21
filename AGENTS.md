@@ -14,3 +14,8 @@
   y `artifacts/` para resultados locales.
 - Mantén las instrucciones de colaboración en `CONTRIBUTING.md` y verifica en
   GitHub las reglas remotas antes de afirmar que están activas.
+- Para trabajo de aplicación, usa `docs/plan/README.md`, la ficha de la tarea y
+  sus contratos. El primer ETL publica las 792 series: las muestras pequeñas
+  son únicamente de prueba, no una reducción de cobertura del producto.
+- Mantén `docs/plan/seguimiento.md` con evidencias reales y dependencias
+  integradas. Una tarea de planeación no autoriza implementar otras fichas.
