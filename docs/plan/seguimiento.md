@@ -10,7 +10,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 |---|---|---|---|
 | T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T02 | integrada | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `5a75488` | Catálogo de 792 identidades y fixtures oficiales; `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
-| T03 | PR abierto | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `14fade5` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. Verificación local completa; `Calidad` pendiente. |
+| T03 | PR abierto | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `14fade5` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. Verificación local completa; `Calidad` pasó en CI. |
 | T04 | pendiente | — | — |
 | T05 | pendiente | — | D1 exige las 792 series desde la primera publicación |
 | T06 | pendiente | — | — |
@@ -63,7 +63,8 @@ del catálogo; y CI con PostgreSQL y pruebas de integración aisladas.
 PR: [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5).
 Verificación local: `make check`; `make test` (14 passed); `make test-db` (3
 passed) contra PostgreSQL 18, después de crear el esquema desde una base vacía.
-CI: pendiente del commit entregado.
+CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actions/runs/39679599666)
+en el commit `8b81d23`.
 Evidencia: `docs/evidencias/T03.md`, incluida la persistencia tras recrear el
 contenedor sin borrar su volumen.
 Pendientes: confirmar `Calidad` e integración del PR.
