@@ -8,7 +8,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 
 | ID | Estado | PR / commit integrado | Evidencia y limitaciones |
 |---|---|---|---|
-| T01 | pendiente | — | — |
+| T01 | PR abierto | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `0459f48` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. CI pendiente. |
 | T02 | pendiente | — | — |
 | T03 | pendiente | — | — |
 | T04 | pendiente | — | — |
@@ -41,6 +41,19 @@ Evidencia: docs/evidencias/Txx.md, cuando corresponda.
 Pendientes: solo límites o accesos que de verdad falten.
 Siguiente tarea elegible: ID y dependencias comprobadas.
 ```
+
+T01 · 2026-10-21
+Resultado: paquete instalable `inflacion_lab`, CLI con ayuda y versión,
+configuración tipada sin conexiones al importar, pytest y ejecución de pruebas
+unitarias dentro de `Calidad`.
+PR: [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3).
+Verificación local: `uv sync --locked`; ayuda y versión mediante ambas entradas;
+`make test` (7 passed); `make check` (todos los hooks pasan).
+CI: pendiente de la ejecución del commit `0459f48`.
+Evidencia: las comprobaciones son reproducibles mediante los comandos anteriores;
+no se requirió fuente, base ni credenciales.
+Pendientes: confirmar CI e integración del PR.
+Siguiente tarea elegible: T02, después de integrar T01.
 
 ## Decisiones posteriores
 
