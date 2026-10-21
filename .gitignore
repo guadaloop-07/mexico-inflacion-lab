@@ -218,3 +218,9 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# Credenciales locales y resultados del laboratorio
+.env.*
+!.env.example
+data/
+artifacts/
