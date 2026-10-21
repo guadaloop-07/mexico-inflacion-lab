@@ -10,7 +10,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 |---|---|---|---|
 | T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T02 | integrada | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `5a75488` | Catálogo de 792 identidades y fixtures oficiales; `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
-| T03 | en curso | — | Esquema PostgreSQL, migración y pruebas de integración en implementación. |
+| T03 | PR abierto | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `14fade5` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. Verificación local completa; `Calidad` pendiente. |
 | T04 | pendiente | — | — |
 | T05 | pendiente | — | D1 exige las 792 series desde la primera publicación |
 | T06 | pendiente | — | — |
@@ -55,6 +55,19 @@ Evidencia: `docs/evidencias/T02.md`; los hashes de los fixtures se comprueban en
 la suite offline.
 Pendientes: ninguna; PR integrado como `5a75488` el 2026-10-21.
 Siguiente tarea elegible: T03 y T04, después de integrar T02.
+
+T03 · 2026-10-21
+Resultado: siete tablas PostgreSQL con claves, FKs, restricciones e índices;
+migración Alembic inicial inmutable; Compose PostgreSQL 18; registro repetible
+del catálogo; y CI con PostgreSQL y pruebas de integración aisladas.
+PR: [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5).
+Verificación local: `make check`; `make test` (14 passed); `make test-db` (3
+passed) contra PostgreSQL 18, después de crear el esquema desde una base vacía.
+CI: pendiente del commit entregado.
+Evidencia: `docs/evidencias/T03.md`, incluida la persistencia tras recrear el
+contenedor sin borrar su volumen.
+Pendientes: confirmar `Calidad` e integración del PR.
+Siguiente tarea elegible: T04, que depende de T02; T05 requiere T03 y T04.
 
 T01 · 2026-10-21
 Resultado: paquete instalable `inflacion_lab`, CLI con ayuda y versión,
