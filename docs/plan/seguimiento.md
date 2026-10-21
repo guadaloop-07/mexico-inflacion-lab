@@ -8,7 +8,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 
 | ID | Estado | PR / commit integrado | Evidencia y limitaciones |
 |---|---|---|---|
-| T01 | PR abierto | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `0459f48` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. |
+| T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T02 | pendiente | — | — |
 | T03 | pendiente | — | — |
 | T04 | pendiente | — | — |

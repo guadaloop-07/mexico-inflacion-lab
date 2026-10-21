@@ -79,8 +79,9 @@ cada archivo pasa por un temporal y reemplazo atómico.
 
 El parser produce `serie_id`, `periodo` y `valor`, más referencia al archivo.
 `periodo` es un `date` del primer día del mes. `valor` se parsea como `Decimal`.
-N/E y otros marcadores demostrados en T02 se conservan como `null`; un token
-desconocido produce error. No se descartan silenciosamente filas no numéricas.
+Un marcador de ausencia se conserva como `null` solo cuando una exportación
+oficial lo haya demostrado y quede registrado en T02; un token desconocido
+produce error. No se descartan silenciosamente filas no numéricas.
 
 ## Esquema lógico
 

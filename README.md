@@ -51,11 +51,14 @@ archivos; revisa los cambios y vuelve a ejecutar la verificación.
 uv run inflacion-lab --help
 uv run inflacion-lab --version
 uv run python -m inflacion_lab --help
+uv run inflacion-lab catalogo validar
 ```
 
 La CLI todavía no descarga datos ni se conecta a una base. Puedes copiar
 `.env.example` a `.env` para documentar la configuración local; la ayuda y la
-importación del paquete no requieren secretos ni servicios activos.
+importación del paquete no requieren secretos ni servicios activos. El último
+comando valida offline las 88 geografías, nueve rubros y 792 series de
+`config/series.yml`.
 
 ## Colaboración
 
