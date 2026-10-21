@@ -34,3 +34,5 @@ jobs:
         run: uv sync --locked
       - name: Verificar calidad
         run: make check
+      - name: Ejecutar pruebas unitarias
+        run: make test

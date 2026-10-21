@@ -4,9 +4,10 @@ Laboratorio interactivo para explorar la inflación en México con datos del INE
 series históricas y comparaciones regionales que ayudan a entender cómo cambian
 los precios.
 
-El proyecto está en su etapa inicial. Este repositorio contiene la configuración
-de colaboración y calidad y el [plan de ejecución](docs/plan/README.md); el ETL,
-la API y el dashboard se incorporarán mediante las tareas de ese plan.
+El proyecto está en su etapa inicial. El repositorio incluye la base instalable
+de Python, la configuración de colaboración y calidad y el
+[plan de ejecución](docs/plan/README.md). El ETL, la API y el dashboard se
+incorporarán mediante las tareas de ese plan.
 
 ## Plan de desarrollo
 
@@ -37,11 +38,24 @@ ejecutar este paso.
 
 ```bash
 make check
+make test
 ```
 
 Se revisan formato, sintaxis de YAML/TOML/JSON, conflictos de merge, claves
 privadas, archivos grandes y calidad de Python con Ruff. Algunos hooks corrigen
 archivos; revisa los cambios y vuelve a ejecutar la verificación.
+
+## Comandos disponibles
+
+```bash
+uv run inflacion-lab --help
+uv run inflacion-lab --version
+uv run python -m inflacion_lab --help
+```
+
+La CLI todavía no descarga datos ni se conecta a una base. Puedes copiar
+`.env.example` a `.env` para documentar la configuración local; la ayuda y la
+importación del paquete no requieren secretos ni servicios activos.
 
 ## Colaboración
 
