@@ -9,7 +9,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 | ID | Estado | PR / commit integrado | Evidencia y limitaciones |
 |---|---|---|---|
 | T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
-| T02 | PR abierto | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `928882d` | Catálogo de 792 identidades y fixtures oficiales; `make test` (12 pruebas) y `make check` pasan localmente. CI pendiente. |
+| T02 | PR abierto | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `928882d` | Catálogo de 792 identidades y fixtures oficiales; `make test` (12 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. |
 | T03 | pendiente | — | — |
 | T04 | pendiente | — | — |
 | T05 | pendiente | — | D1 exige las 792 series desde la primera publicación |
@@ -49,7 +49,8 @@ Guadalajara con manifiesto y evidencia del formato de fuente.
 PR: [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4).
 Verificación local: `uv sync --locked`; ambas entradas de `catalogo validar`;
 `make test` (12 passed); `make check` (todos los hooks pasan).
-CI: pendiente de la ejecución del commit `928882d`.
+CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actions/runs/39645061955/job/119378327017)
+en el commit `2ff1492`.
 Evidencia: `docs/evidencias/T02.md`; los hashes de los fixtures se comprueban en
 la suite offline.
 Pendientes: confirmar CI e integración del PR.
