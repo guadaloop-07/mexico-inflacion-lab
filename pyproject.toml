@@ -6,14 +6,22 @@ readme = "README.md"
 requires-python = ">=3.12"
 dependencies = []
 
+[project.scripts]
+inflacion-lab = "inflacion_lab.cli:main"
+
+[build-system]
+requires = ["hatchling>=1.28,<2"]
+build-backend = "hatchling.build"
+
+[tool.hatch.build.targets.wheel]
+packages = ["src/inflacion_lab"]
+
 [dependency-groups]
 dev = [
     "pre-commit>=4.3,<5",
+    "pytest>=8.3,<9",
     "ruff>=0.14,<0.18",
 ]
-
-[tool.uv]
-package = false
 
 [tool.ruff]
 target-version = "py312"
@@ -21,3 +29,9 @@ line-length = 100
 
 [tool.ruff.lint]
 select = ["E4", "E7", "E9", "F", "I", "UP", "B"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+markers = [
+    "integration: prueba que requiere una base de datos u otro servicio externo",
+]

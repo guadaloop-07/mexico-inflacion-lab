@@ -1,4 +1,4 @@
-.PHONY: setup hooks check
+.PHONY: setup hooks check test
 
 setup:
 	uv sync --locked
@@ -9,3 +9,6 @@ hooks:
 
 check:
 	uv run --locked pre-commit run --all-files --hook-stage manual --show-diff-on-failure
+
+test:
+	uv run --locked pytest -m "not integration"
