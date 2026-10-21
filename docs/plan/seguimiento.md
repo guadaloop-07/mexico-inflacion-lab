@@ -8,7 +8,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 
 | ID | Estado | PR / commit integrado | Evidencia y limitaciones |
 |---|---|---|---|
-| T01 | PR abierto | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `0459f48` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. CI pendiente. |
+| T01 | PR abierto | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `0459f48` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. |
 | T02 | pendiente | — | — |
 | T03 | pendiente | — | — |
 | T04 | pendiente | — | — |
@@ -49,7 +49,8 @@ unitarias dentro de `Calidad`.
 PR: [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3).
 Verificación local: `uv sync --locked`; ayuda y versión mediante ambas entradas;
 `make test` (7 passed); `make check` (todos los hooks pasan).
-CI: pendiente de la ejecución del commit `0459f48`.
+CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actions/runs/39635584104/job/119345018683)
+en el commit `0c38652`.
 Evidencia: las comprobaciones son reproducibles mediante los comandos anteriores;
 no se requirió fuente, base ni credenciales.
 Pendientes: confirmar CI e integración del PR.
