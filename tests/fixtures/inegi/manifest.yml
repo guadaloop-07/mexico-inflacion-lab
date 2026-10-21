@@ -1,0 +1,34 @@
+version: 1
+fuente:
+  proveedor: INEGI
+  exportador_csv: https://www.inegi.org.mx/app/indicesdepreciosv2/Exportacion.aspx
+  recuperado_el: '2026-10-21'
+  codificacion: iso-8859-1
+  delimitador: ','
+  terminador_de_linea: CRLF
+  orientacion: vertical
+  metadatos: true
+  tipo: Niveles
+  informacion: Índices
+fixtures:
+  - archivo: mexico-2024-2026.csv
+    geografia_id: mx
+    id_estructura: '112001700030'
+    sha256: 713797f037b1a664cb87200323fe754ee35b303cbb90bcba1d7956f28941628c
+    periodos_solicitados: [2024, 2026]
+    ids_serie_inegi: ['865586', '865587', '865758', '865815', '865840', '865895', '865951', '865987', '866034']
+    contenido_esperado: 9 series, fila de IDs y al menos 24 meses mensuales.
+  - archivo: jalisco-2024-2026.csv
+    geografia_id: entidad-14
+    id_estructura: '1120017000700140'
+    sha256: 36fe3023660edf690b29c71a2177942cd945687fdf532f6f08cf4b1c3a0cfe9e
+    periodos_solicitados: [2024, 2026]
+    ids_serie_inegi: ['900540', '900541', '900696', '900748', '900773', '900828', '900878', '900914', '900959']
+    contenido_esperado: 9 series, fila de IDs y al menos 24 meses mensuales.
+  - archivo: guadalajara-2024-2026.csv
+    geografia_id: ciudad-21
+    id_estructura: '1120017000600210'
+    sha256: c84265b6cd0219781a3f11a9135cc1cd62e70afcdf902267e7781e45eab8f415
+    periodos_solicitados: [2024, 2026]
+    ids_serie_inegi: ['879688', '879689', '879844', '879896', '879921', '879976', '880026', '880062', '880107']
+    contenido_esperado: 9 series, fila de IDs y al menos 24 meses mensuales.

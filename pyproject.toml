@@ -4,7 +4,9 @@ version = "0.1.0"
 description = "Laboratorio interactivo para explorar la inflación en México con datos del INEGI."
 readme = "README.md"
 requires-python = ">=3.12"
-dependencies = []
+dependencies = [
+    "pyyaml>=6,<7",
+]
 
 [project.scripts]
 inflacion-lab = "inflacion_lab.cli:main"

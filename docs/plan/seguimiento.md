@@ -8,8 +8,8 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 
 | ID | Estado | PR / commit integrado | Evidencia y limitaciones |
 |---|---|---|---|
-| T01 | PR abierto | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `0459f48` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. |
-| T02 | pendiente | — | — |
+| T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
+| T02 | PR abierto | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `928882d` | Catálogo de 792 identidades y fixtures oficiales; `make test` (12 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. |
 | T03 | pendiente | — | — |
 | T04 | pendiente | — | — |
 | T05 | pendiente | — | D1 exige las 792 series desde la primera publicación |
@@ -41,6 +41,20 @@ Evidencia: docs/evidencias/Txx.md, cuando corresponda.
 Pendientes: solo límites o accesos que de verdad falten.
 Siguiente tarea elegible: ID y dependencias comprobadas.
 ```
+
+T02 · 2026-10-21
+Resultado: catálogo autónomo de 88 geografías, nueve rubros y 792 IDs INEGI
+verificados; comando offline; fixtures originales de México, Jalisco y
+Guadalajara con manifiesto y evidencia del formato de fuente.
+PR: [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4).
+Verificación local: `uv sync --locked`; ambas entradas de `catalogo validar`;
+`make test` (12 passed); `make check` (todos los hooks pasan).
+CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actions/runs/39645061955/job/119378327017)
+en el commit `2ff1492`.
+Evidencia: `docs/evidencias/T02.md`; los hashes de los fixtures se comprueban en
+la suite offline.
+Pendientes: confirmar CI e integración del PR.
+Siguiente tarea elegible: T03 y T04, después de integrar T02.
 
 T01 · 2026-10-21
 Resultado: paquete instalable `inflacion_lab`, CLI con ayuda y versión,
