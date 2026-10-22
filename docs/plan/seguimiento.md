@@ -10,8 +10,8 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 |---|---|---|---|
 | T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T02 | integrada | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `5a75488` | Catálogo de 792 identidades y fixtures oficiales; `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
-| T03 | PR abierto | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `14fade5` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. Verificación local completa; `Calidad` pasó en CI. |
-| T04 | pendiente | — | — |
+| T03 | integrada | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `1ee6bc8` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. `Calidad` pasó en CI. Integrada el 22 de octubre de 2026. |
+| T04 | PR abierto | [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6) | Extracción agrupada, parser y originales atómicos; verificación local completa. `Calidad` pendiente. |
 | T05 | pendiente | — | D1 exige las 792 series desde la primera publicación |
 | T06 | pendiente | — | — |
 | T07 | pendiente | — | — |
@@ -67,8 +67,20 @@ CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actio
 en el commit `8b81d23`.
 Evidencia: `docs/evidencias/T03.md`, incluida la persistencia tras recrear el
 contenedor sin borrar su volumen.
-Pendientes: confirmar `Calidad` e integración del PR.
-Siguiente tarea elegible: T04, que depende de T02; T05 requiere T03 y T04.
+Pendientes: ninguna; PR integrado como `1ee6bc8` el 2026-10-22.
+Siguiente tarea elegible: T04; T05 requiere T03 y T04.
+
+T04 · 2026-10-22
+Resultado: extracción agrupada de las 88 geografías; parser CSV estricto con
+fechas mensuales y `Decimal`; originales y manifiesto atómicos por ejecución;
+y `etl fetch` sin publicación en base.
+PR: [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6).
+Verificación local: `make check` (todos los hooks pasan); `make test` (25
+pruebas pasan, sin red ni base).
+CI: pendiente para el commit entregado.
+Evidencia: `docs/evidencias/T04.md`.
+Pendientes: revisión de CI; no se realizó descarga viva.
+Siguiente tarea elegible: T05 después de integrar T04.
 
 T01 · 2026-10-21
 Resultado: paquete instalable `inflacion_lab`, CLI con ayuda y versión,

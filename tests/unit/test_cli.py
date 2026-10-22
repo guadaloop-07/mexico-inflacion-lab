@@ -5,6 +5,7 @@ import importlib
 import pytest
 
 from inflacion_lab.cli import main
+from inflacion_lab.etl.ejecucion import FetchResult
 
 
 def test_imports_do_not_require_configuration(monkeypatch: pytest.MonkeyPatch) -> None:
@@ -37,3 +38,17 @@ def test_version_is_available_without_configuration(capsys: pytest.CaptureFixtur
 
     assert exit_status.value.code == 0
     assert "inflacion-lab 0.1.0" in capsys.readouterr().out
+
+
+def test_etl_fetch_reports_complete_coverage(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], tmp_path
+) -> None:
+    def fake_fetch(*args: object, **kwargs: object) -> FetchResult:
+        return FetchResult(tmp_path / "raw" / "run", 88, 792, 1000)
+
+    monkeypatch.setattr("inflacion_lab.cli.fetch_catalog", fake_fetch)
+
+    assert main(["etl", "fetch", "--data-dir", str(tmp_path)]) == 0
+    output = capsys.readouterr().out
+    assert "88/88 geografías" in output
+    assert "792/792 series" in output
