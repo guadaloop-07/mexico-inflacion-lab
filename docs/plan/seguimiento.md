@@ -11,7 +11,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 | T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T02 | PR abierto | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `928882d` | Catálogo de 792 identidades y fixtures oficiales; `make test` (12 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. |
 | T03 | pendiente | — | — |
-| T04 | pendiente | — | — |
+| T04 | en curso | — | Extracción agrupada, parser y originales implementados localmente; falta abrir PR y confirmar `Calidad`. |
 | T05 | pendiente | — | D1 exige las 792 series desde la primera publicación |
 | T06 | pendiente | — | — |
 | T07 | pendiente | — | — |
@@ -55,6 +55,18 @@ Evidencia: `docs/evidencias/T02.md`; los hashes de los fixtures se comprueban en
 la suite offline.
 Pendientes: confirmar CI e integración del PR.
 Siguiente tarea elegible: T03 y T04, después de integrar T02.
+
+T04 · 2026-10-22
+Resultado: extracción agrupada de las 88 geografías; parser CSV estricto con
+fechas mensuales y `Decimal`; originales y manifiesto atómicos por ejecución;
+y `etl fetch` sin publicación en base. La tarea está en curso hasta abrir su PR.
+Verificación local: `make check` (todos los hooks pasan); `make test` (25
+pruebas pasan, sin red ni base).
+CI: pendiente de abrir el PR.
+Evidencia: `docs/evidencias/T04.md`.
+Pendientes: revisión de CI y apertura de PR; no se realizó descarga viva.
+Siguiente tarea elegible: ninguna hasta registrar T04 como PR abierto; T05
+también requiere la integración de T03.
 
 T01 · 2026-10-21
 Resultado: paquete instalable `inflacion_lab`, CLI con ayuda y versión,
