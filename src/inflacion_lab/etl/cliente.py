@@ -5,7 +5,6 @@ from __future__ import annotations
 from collections.abc import Callable
 from datetime import UTC, datetime
 from time import sleep
-from typing import Any
 
 import httpx
 
@@ -34,7 +33,9 @@ class InpcClient:
         if attempts < 1:
             raise ValueError("attempts debe ser al menos 1.")
         self.export_url = export_url
-        self.client = client or httpx.Client(timeout=httpx.Timeout(connect=10.0, read=45.0, write=10.0))
+        self.client = client or httpx.Client(
+            timeout=httpx.Timeout(connect=10.0, read=45.0, write=10.0)
+        )
         self._owns_client = client is None
         self.attempts = attempts
         self.pause_seconds = pause_seconds
@@ -104,7 +105,9 @@ class InpcClient:
             return min(float(retry_after), 30.0)
         except ValueError:
             try:
-                then = datetime.strptime(retry_after, "%a, %d %b %Y %H:%M:%S %Z").replace(tzinfo=UTC)
+                then = datetime.strptime(retry_after, "%a, %d %b %Y %H:%M:%S %Z").replace(
+                    tzinfo=UTC
+                )
             except ValueError:
                 return self.pause_seconds
             return min(max((then - datetime.now(UTC)).total_seconds(), 0.0), 30.0)
@@ -113,10 +116,16 @@ class InpcClient:
     def _validate_csv(response: httpx.Response, geografia: Geografia) -> None:
         content_type = response.headers.get("Content-Type", "").lower()
         start = response.content.lstrip().lower()
-        if not response.content or "html" in content_type or start.startswith((b"<html", b"<!doctype")):
+        if (
+            not response.content
+            or "html" in content_type
+            or start.startswith((b"<html", b"<!doctype"))
+        ):
             raise TransportError(f"{geografia.id}: la respuesta no es un CSV del INPC.")
 
-    def manifest_parameters(self, geografia: Geografia, start_year: int, end_year: int) -> dict[str, str]:
+    def manifest_parameters(
+        self, geografia: Geografia, start_year: int, end_year: int
+    ) -> dict[str, str]:
         """Devuelve parámetros seguros para el manifiesto, sin URL ni credenciales."""
         return self._params(geografia, start_year, end_year)
 

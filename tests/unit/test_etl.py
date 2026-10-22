@@ -7,7 +7,7 @@ from pathlib import Path
 import httpx
 import pytest
 
-from inflacion_lab.catalogo import Geografia, Serie, load_catalog
+from inflacion_lab.catalogo import Geografia, load_catalog
 from inflacion_lab.etl.cliente import InpcClient, TransportError
 from inflacion_lab.etl.ejecucion import FetchRunError, fetch_catalog
 from inflacion_lab.etl.parser import ParseError, parse_csv
@@ -96,7 +96,9 @@ def test_client_retries_timeout_and_429_then_returns_csv(mexico: Geografia) -> N
         return httpx.Response(200, content=payload, request=request)
 
     pauses: list[float] = []
-    client = InpcClient(client=httpx.Client(transport=httpx.MockTransport(handler)), sleep_fn=pauses.append)
+    client = InpcClient(
+        client=httpx.Client(transport=httpx.MockTransport(handler)), sleep_fn=pauses.append
+    )
     assert client.fetch(mexico, 2018, 2026) == payload
     assert calls == 3
     assert pauses == [0.25, 0.0]
@@ -104,7 +106,9 @@ def test_client_retries_timeout_and_429_then_returns_csv(mexico: Geografia) -> N
 
 def test_client_rejects_persistent_error_and_html(mexico: Geografia) -> None:
     failed = InpcClient(
-        client=httpx.Client(transport=httpx.MockTransport(lambda request: httpx.Response(500, request=request))),
+        client=httpx.Client(
+            transport=httpx.MockTransport(lambda request: httpx.Response(500, request=request))
+        ),
         sleep_fn=lambda _: None,
     )
     with pytest.raises(TransportError, match="HTTP 500"):
@@ -121,7 +125,9 @@ def test_client_rejects_persistent_error_and_html(mexico: Geografia) -> None:
         html.fetch(mexico, 2018, 2026)
 
 
-def test_fetch_preserves_manifest_and_fails_for_incomplete_catalog(tmp_path: Path, mexico: Geografia) -> None:
+def test_fetch_preserves_manifest_and_fails_for_incomplete_catalog(
+    tmp_path: Path, mexico: Geografia
+) -> None:
     catalog = load_catalog()
     payload = (FIXTURES / "mexico-2024-2026.csv").read_bytes()
 

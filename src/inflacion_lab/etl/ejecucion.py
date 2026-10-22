@@ -5,7 +5,7 @@ from __future__ import annotations
 import hashlib
 import json
 import os
-from dataclasses import asdict, dataclass
+from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from uuid import uuid4
@@ -88,7 +88,11 @@ class _RawRun:
         self.manifest: dict[str, object] = {
             "ejecucion": path.name,
             "inicio_utc": datetime.now(UTC).isoformat(),
-            "solicitud": {"inicio": start_year, "fin": end_year, "series_esperadas": expected_series},
+            "solicitud": {
+                "inicio": start_year,
+                "fin": end_year,
+                "series_esperadas": expected_series,
+            },
             "archivos": [],
         }
 
@@ -149,5 +153,7 @@ class _RawRun:
         self.manifest["estado"] = "fallido" if failures else "válido"
         target = self.path / "manifest.json"
         temporary = target.with_suffix(".json.tmp")
-        temporary.write_text(json.dumps(self.manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        temporary.write_text(
+            json.dumps(self.manifest, ensure_ascii=False, indent=2) + "\n", encoding="utf-8"
+        )
         temporary.replace(target)
