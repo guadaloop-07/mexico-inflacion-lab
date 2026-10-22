@@ -8,6 +8,7 @@ from pathlib import Path
 
 from . import __version__
 from .catalogo import CatalogError, load_catalog
+from .config import ConfigurationError, Settings
 from .etl.ejecucion import FetchRunError, fetch_catalog
 
 
@@ -30,7 +31,10 @@ def build_parser() -> argparse.ArgumentParser:
         "validar", help="valida el catálogo sin acceder a la red"
     )
     validar.add_argument("--ruta", type=Path, default=Path("config/series.yml"))
-
+    registrar = catalogo_subcommands.add_parser(
+        "registrar", help="registra el catálogo completo en PostgreSQL"
+    )
+    registrar.add_argument("--ruta", type=Path, default=Path("config/series.yml"))
     etl = subcommands.add_parser("etl", help="descarga y prepara originales del INPC")
     etl_subcommands = etl.add_subparsers(dest="etl_command")
     fetch = etl_subcommands.add_parser("fetch", help="descarga y valida el catálogo completo")
@@ -52,6 +56,22 @@ def main(args: Sequence[str] | None = None) -> int:
             parser.error(str(error))
         print(
             f"Catálogo válido: {len(catalogo.geografias)} geografías, "
+            f"{len(catalogo.rubros)} rubros y {catalogo.total_series} series."
+        )
+    if namespace.command == "catalogo" and namespace.catalog_command == "registrar":
+        try:
+            catalogo = load_catalog(namespace.ruta)
+            from .db.catalogo import register_catalog
+            from .db.conexion import create_engine
+
+            with create_engine(
+                Settings.from_env().database_url("migrations")
+            ).begin() as connection:
+                register_catalog(connection, catalogo)
+        except (CatalogError, ConfigurationError, ValueError) as error:
+            parser.error(str(error))
+        print(
+            f"Catálogo registrado: {len(catalogo.geografias)} geografías, "
             f"{len(catalogo.rubros)} rubros y {catalogo.total_series} series."
         )
     if namespace.command == "etl" and namespace.etl_command == "fetch":

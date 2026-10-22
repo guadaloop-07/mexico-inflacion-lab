@@ -60,6 +60,32 @@ importación del paquete no requieren secretos ni servicios activos. El último
 comando valida offline las 88 geografías, nueve rubros y 792 series de
 `config/series.yml`.
 
+## PostgreSQL de desarrollo
+
+T03 incorpora PostgreSQL 18 en Compose. El puerto queda enlazado solamente a
+`localhost` y el volumen `postgres_data` conserva los datos al recrear el
+contenedor. Inícialo y crea una base de pruebas separada una sola vez:
+
+```bash
+make db-up
+docker compose exec postgres createdb -U inflacion_lab inflacion_lab_test
+export DATABASE_URL_MIGRATIONS=postgresql+psycopg://inflacion_lab:inflacion_lab@localhost:5432/inflacion_lab
+export TEST_DATABASE_URL=postgresql+psycopg://inflacion_lab:inflacion_lab@localhost:5432/inflacion_lab_test
+make db-migrate
+make test-db
+```
+
+`make test-db` no crea ni deriva una URL desde la base de desarrollo: requiere
+`TEST_DATABASE_URL` y rechaza cualquier nombre que no termine en `_test` antes
+de ejecutar DDL. Para registrar el catálogo ya migrado de manera repetible usa:
+
+```bash
+uv run inflacion-lab catalogo registrar
+```
+
+El comando usa `DATABASE_URL_MIGRATIONS`; repetirlo conserva 88 geografías,
+nueve rubros y 792 series sin duplicarlas.
+
 ## Colaboración
 
 El flujo es `rama de trabajo → pull request → CI → squash merge`.
