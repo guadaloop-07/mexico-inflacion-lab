@@ -4,10 +4,9 @@ Laboratorio interactivo para explorar la inflación en México con datos del INE
 series históricas y comparaciones regionales que ayudan a entender cómo cambian
 los precios.
 
-El proyecto está en su etapa inicial. El repositorio incluye la base instalable
-de Python, la configuración de colaboración y calidad y el
-[plan de ejecución](docs/plan/README.md). El ETL, la API y el dashboard se
-incorporarán mediante las tareas de ese plan.
+El proyecto incluye la base instalable de Python, el catálogo completo, el ETL
+transaccional y PostgreSQL. La API y el dashboard se incorporarán mediante las
+siguientes tareas del [plan de ejecución](docs/plan/README.md).
 
 ## Plan de desarrollo
 
@@ -52,13 +51,14 @@ uv run inflacion-lab --help
 uv run inflacion-lab --version
 uv run python -m inflacion_lab --help
 uv run inflacion-lab catalogo validar
+uv run inflacion-lab etl run --mode bootstrap
 ```
 
-La CLI todavía no descarga datos ni se conecta a una base. Puedes copiar
-`.env.example` a `.env` para documentar la configuración local; la ayuda y la
-importación del paquete no requieren secretos ni servicios activos. El último
-comando valida offline las 88 geografías, nueve rubros y 792 series de
-`config/series.yml`.
+Puedes copiar `.env.example` a `.env` para documentar la configuración local;
+la ayuda y la importación del paquete no requieren secretos ni servicios
+activos. `catalogo validar` comprueba offline las 88 geografías, nueve rubros y
+792 series de `config/series.yml`. `etl run` descarga, valida y publica las 792
+series como una única versión; si alguna falla, conserva la publicación previa.
 
 ## PostgreSQL de desarrollo
 
@@ -82,6 +82,19 @@ de ejecutar DDL. Para registrar el catálogo ya migrado de manera repetible usa:
 ```bash
 uv run inflacion-lab catalogo registrar
 ```
+
+Después de migrar la base de desarrollo y definir `DATABASE_URL_ETL`, ejecuta
+la carga completa o sus actualizaciones:
+
+```bash
+make etl-bootstrap
+make etl-refresh
+make etl-reconcile
+```
+
+`refresh` exige un bootstrap exitoso y obtiene los últimos 24 meses; `reconcile`
+vuelve a solicitar la historia desde 2018. Los originales y manifiestos se
+guardan bajo `data/raw/` y no se versionan.
 
 El comando usa `DATABASE_URL_MIGRATIONS`; repetirlo conserva 88 geografías,
 nueve rubros y 792 series sin duplicarlas.

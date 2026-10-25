@@ -1,4 +1,4 @@
-.PHONY: setup hooks check test db-up db-migrate test-db
+.PHONY: setup hooks check test db-up db-migrate test-db etl-bootstrap etl-refresh etl-reconcile
 
 setup:
 	uv sync --locked
@@ -21,3 +21,12 @@ db-migrate:
 
 test-db:
 	uv run --locked pytest -m integration
+
+etl-bootstrap:
+	uv run --locked inflacion-lab etl run --mode bootstrap
+
+etl-refresh:
+	uv run --locked inflacion-lab etl run --mode refresh
+
+etl-reconcile:
+	uv run --locked inflacion-lab etl run --mode reconcile

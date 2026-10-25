@@ -34,7 +34,7 @@ class InpcClient:
             raise ValueError("attempts debe ser al menos 1.")
         self.export_url = export_url
         self.client = client or httpx.Client(
-            timeout=httpx.Timeout(connect=10.0, read=45.0, write=10.0)
+            timeout=httpx.Timeout(connect=10.0, read=45.0, write=10.0, pool=10.0)
         )
         self._owns_client = client is None
         self.attempts = attempts
