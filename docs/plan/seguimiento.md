@@ -90,7 +90,8 @@ reconcile.
 PR: [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7).
 Verificación local: 30 pruebas unitarias y seis de integración pasan; incluye
 rollback y exclusión de escritor concurrente en PostgreSQL 18.
-CI: pendiente para el commit entregado.
+CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actions/runs/40226713286)
+en el commit `efb64b5`.
 Evidencia: `docs/evidencias/T05.md`.
 Pendientes: el bootstrap real recibió HTTP 500 en las 88 respuestas; no se
 publicaron observaciones y D1 permanece pendiente de recuperar la fuente.
