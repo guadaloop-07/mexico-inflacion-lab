@@ -11,6 +11,7 @@ from inflacion_lab.catalogo import Geografia, load_catalog
 from inflacion_lab.etl.cliente import InpcClient, TransportError
 from inflacion_lab.etl.ejecucion import FetchRunError, fetch_catalog
 from inflacion_lab.etl.parser import ParseError, parse_csv
+from inflacion_lab.etl.validacion import ValidationError, validate_batch
 
 FIXTURES = Path("tests/fixtures/inegi")
 
@@ -123,6 +124,27 @@ def test_client_rejects_persistent_error_and_html(mexico: Geografia) -> None:
     )
     with pytest.raises(TransportError, match="no es un CSV"):
         html.fetch(mexico, 2018, 2026)
+
+
+def test_default_client_can_be_constructed() -> None:
+    client = InpcClient()
+    try:
+        assert client.client.timeout.connect == 10.0
+        assert client.client.timeout.pool == 10.0
+    finally:
+        client.close()
+
+
+def test_validation_rejects_a_missing_interior_month(mexico: Geografia) -> None:
+    catalog = load_catalog()
+    rows = list(parse_csv((FIXTURES / "mexico-2024-2026.csv").read_bytes(), mexico))
+    rows = [
+        row for row in rows if not (row.serie_id == "865586" and row.periodo == date(2025, 1, 1))
+    ]
+    mini = type(catalog)(rubros=catalog.rubros, geografias=(mexico,))
+
+    with pytest.raises(ValidationError, match="hueco"):
+        validate_batch(mini, tuple(rows), start=date(2024, 1, 1))
 
 
 def test_fetch_preserves_manifest_and_fails_for_incomplete_catalog(

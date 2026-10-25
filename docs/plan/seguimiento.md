@@ -11,8 +11,8 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 | T01 | integrada | [#3](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/3) / `6a926f8` | Paquete y CLI base; `make test` (7 pruebas) y `make check` pasan localmente. `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T02 | integrada | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `5a75488` | Catálogo de 792 identidades y fixtures oficiales; `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T03 | integrada | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `1ee6bc8` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. `Calidad` pasó en CI. Integrada el 22 de octubre de 2026. |
-| T04 | PR abierto | [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6) | Extracción agrupada, parser y originales atómicos; verificación local completa. `Calidad` pendiente. |
-| T05 | pendiente | — | D1 exige las 792 series desde la primera publicación |
+| T04 | integrada | [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6) / `59aeaef` | Extracción agrupada, parser y originales atómicos; `Calidad` pasó. Integrada el 22 de octubre de 2026. |
+| T05 | PR abierto | [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7) / `786ddc2` | Carga transaccional probada; el bootstrap en vivo recibió HTTP 500 para las 88 geografías y D1 sigue pendiente. |
 | T06 | pendiente | — | — |
 | T07 | pendiente | — | — |
 | T08 | pendiente | — | — |
@@ -77,10 +77,25 @@ y `etl fetch` sin publicación en base.
 PR: [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6).
 Verificación local: `make check` (todos los hooks pasan); `make test` (25
 pruebas pasan, sin red ni base).
-CI: pendiente para el commit entregado.
+CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actions/runs/39825865071)
+en el commit `59aeaef`.
 Evidencia: `docs/evidencias/T04.md`.
-Pendientes: revisión de CI; no se realizó descarga viva.
+Pendientes: no se realizó descarga viva en T04; T05 intentará el bootstrap.
 Siguiente tarea elegible: T05 después de integrar T04.
+
+T05 · 2026-10-25
+Resultado: validación de cobertura, bloqueo de escritor, publicación atómica,
+idempotencia y auditoría de correcciones; comandos para bootstrap, refresh y
+reconcile.
+PR: [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7).
+Verificación local: 30 pruebas unitarias y seis de integración pasan; incluye
+rollback y exclusión de escritor concurrente en PostgreSQL 18.
+CI: [`Calidad` pasó](https://github.com/guadaloop-07/mexico-inflacion-lab/actions/runs/40226713286)
+en el commit `efb64b5`.
+Evidencia: `docs/evidencias/T05.md`.
+Pendientes: el bootstrap real recibió HTTP 500 en las 88 respuestas; no se
+publicaron observaciones y D1 permanece pendiente de recuperar la fuente.
+Siguiente tarea elegible: ninguna hasta realizar una publicación completa válida.
 
 T01 · 2026-10-21
 Resultado: paquete instalable `inflacion_lab`, CLI con ayuda y versión,

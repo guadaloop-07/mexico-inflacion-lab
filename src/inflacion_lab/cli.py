@@ -9,7 +9,7 @@ from pathlib import Path
 from . import __version__
 from .catalogo import CatalogError, load_catalog
 from .config import ConfigurationError, Settings
-from .etl.ejecucion import FetchRunError, fetch_catalog
+from .etl.ejecucion import EtlRunError, FetchRunError, fetch_catalog, run_catalog
 
 
 def build_parser() -> argparse.ArgumentParser:
@@ -42,6 +42,9 @@ def build_parser() -> argparse.ArgumentParser:
     fetch.add_argument("--data-dir", type=Path, default=Path("data"))
     fetch.add_argument("--inicio", type=int, default=2018)
     fetch.add_argument("--fin", type=int)
+    run = etl_subcommands.add_parser("run", help="publica un lote completo y validado")
+    run.add_argument("--ruta", type=Path, default=Path("config/series.yml"))
+    run.add_argument("--mode", choices=("bootstrap", "refresh", "reconcile"), required=True)
     return parser
 
 
@@ -89,5 +92,17 @@ def main(args: Sequence[str] | None = None) -> int:
             f"Extracción válida: {result.geografias_ok}/{len(catalogo.geografias)} "
             f"geografías, {result.series_recibidas}/{catalogo.total_series} series, "
             f"{result.observaciones} observaciones. Originales: {result.run_dir}."
+        )
+    if namespace.command == "etl" and namespace.etl_command == "run":
+        try:
+            settings = Settings.from_env()
+            catalogo = load_catalog(namespace.ruta)
+            result = run_catalog(catalogo, settings, mode=namespace.mode)
+        except (CatalogError, ConfigurationError, EtlRunError, ValueError) as error:
+            parser.error(str(error))
+        print(
+            f"Publicación {namespace.mode} exitosa: {result.geografias_ok}/"
+            f"{len(catalogo.geografias)} geografías, {result.series_recibidas}/"
+            f"{catalogo.total_series} series, {result.observaciones} observaciones."
         )
     return 0

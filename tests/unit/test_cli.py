@@ -52,3 +52,15 @@ def test_etl_fetch_reports_complete_coverage(
     output = capsys.readouterr().out
     assert "88/88 geografías" in output
     assert "792/792 series" in output
+
+
+def test_etl_run_reports_a_published_batch(
+    monkeypatch: pytest.MonkeyPatch, capsys: pytest.CaptureFixture[str], tmp_path
+) -> None:
+    def fake_run(*args: object, **kwargs: object) -> FetchResult:
+        return FetchResult(tmp_path / "raw" / "run", 88, 792, 1000)
+
+    monkeypatch.setattr("inflacion_lab.cli.run_catalog", fake_run)
+
+    assert main(["etl", "run", "--mode", "bootstrap"]) == 0
+    assert "Publicación bootstrap exitosa" in capsys.readouterr().out

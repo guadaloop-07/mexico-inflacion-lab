@@ -61,6 +61,12 @@ def test_observations_preserve_decimals_and_nulls_and_enforce_constraints(migrat
         register_catalog(connection, catalog)
         series_id = connection.scalar(select(series.c.id).limit(1))
         connection.execute(
+            delete(revisiones_observacion).where(
+                revisiones_observacion.c.serie_id == series_id,
+                revisiones_observacion.c.periodo.in_([date(2026, 1, 1), date(2026, 2, 1)]),
+            )
+        )
+        connection.execute(
             delete(observaciones).where(
                 observaciones.c.serie_id == series_id,
                 observaciones.c.periodo.in_([date(2026, 1, 1), date(2026, 2, 1)]),
@@ -107,7 +113,10 @@ def test_observations_preserve_decimals_and_nulls_and_enforce_constraints(migrat
         values = (
             connection.execute(
                 select(observaciones.c.valor)
-                .where(observaciones.c.serie_id == series_id)
+                .where(
+                    observaciones.c.serie_id == series_id,
+                    observaciones.c.periodo.in_([date(2026, 1, 1), date(2026, 2, 1)]),
+                )
                 .order_by(observaciones.c.periodo)
             )
             .scalars()
@@ -143,7 +152,7 @@ def test_observations_preserve_decimals_and_nulls_and_enforce_constraints(migrat
                 connection.execute(
                     insert(revisiones_observacion).values(
                         serie_id=series_id,
-                        periodo=date(2026, 4, 1),
+                        periodo=date(2030, 4, 1),
                         valor_anterior=None,
                         valor_nuevo=Decimal("123.456789"),
                         ejecucion_id=execution_id,
@@ -157,7 +166,7 @@ def test_observations_preserve_decimals_and_nulls_and_enforce_constraints(migrat
                 connection.execute(
                     insert(observaciones).values(
                         serie_id=series_id,
-                        periodo=date(2026, 3, 1),
+                        periodo=date(2030, 3, 1),
                         valor=Decimal("-1.000000"),
                         archivo_fuente_id=file_id,
                         ejecucion_id=execution_id,
