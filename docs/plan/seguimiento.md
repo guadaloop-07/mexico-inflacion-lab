@@ -12,7 +12,7 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 | T02 | integrada | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `5a75488` | Catálogo de 792 identidades y fixtures oficiales; `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T03 | integrada | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `1ee6bc8` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. `Calidad` pasó en CI. Integrada el 22 de octubre de 2026. |
 | T04 | integrada | [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6) / `59aeaef` | Extracción agrupada, parser y originales atómicos; `Calidad` pasó. Integrada el 22 de octubre de 2026. |
-| T05 | en curso | `feat/t05-publicacion-completa` | Carga transaccional probada; el bootstrap en vivo recibió HTTP 500 para las 88 geografías y D1 sigue pendiente. |
+| T05 | PR abierto | [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7) / `786ddc2` | Carga transaccional probada; el bootstrap en vivo recibió HTTP 500 para las 88 geografías y D1 sigue pendiente. |
 | T06 | pendiente | — | — |
 | T07 | pendiente | — | — |
 | T08 | pendiente | — | — |
@@ -87,10 +87,10 @@ T05 · 2026-10-25
 Resultado: validación de cobertura, bloqueo de escritor, publicación atómica,
 idempotencia y auditoría de correcciones; comandos para bootstrap, refresh y
 reconcile.
-PR: en preparación desde `feat/t05-publicacion-completa`.
+PR: [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7).
 Verificación local: 30 pruebas unitarias y seis de integración pasan; incluye
 rollback y exclusión de escritor concurrente en PostgreSQL 18.
-CI: pendiente de abrir el PR.
+CI: pendiente para el commit entregado.
 Evidencia: `docs/evidencias/T05.md`.
 Pendientes: el bootstrap real recibió HTTP 500 en las 88 respuestas; no se
 publicaron observaciones y D1 permanece pendiente de recuperar la fuente.
