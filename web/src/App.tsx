@@ -22,11 +22,23 @@ export function App() {
     const controller = new AbortController();
     const current = ++requestId.current;
     setState("loading");
-    Promise.all([getSummary(until || undefined, controller.signal), getHistory(measure, from, until || month, controller.signal)])
+    getSummary(until || undefined, controller.signal)
+      .then(async (nextSummary) => {
+        if (!nextSummary.datos.periodo || nextSummary.meta.estado === "sin_publicacion") {
+          return [nextSummary, null] as const;
+        }
+        const nextHistory = await getHistory(
+          measure,
+          from,
+          until || nextSummary.datos.periodo,
+          controller.signal,
+        );
+        return [nextSummary, nextHistory] as const;
+      })
       .then(([nextSummary, nextHistory]) => {
         if (current !== requestId.current) return;
-        setSummary(nextSummary.datos); setHistory(nextHistory.datos); setMeta(nextSummary.meta);
-        setState(nextSummary.meta.estado === "sin_publicacion" || nextHistory.meta.estado === "sin_datos" ? "empty" : "ready");
+        setSummary(nextSummary.datos); setHistory(nextHistory?.datos ?? []); setMeta(nextSummary.meta);
+        setState(nextSummary.meta.estado === "sin_publicacion" || nextHistory?.meta.estado === "sin_datos" ? "empty" : "ready");
       })
       .catch((error: unknown) => { if (current === requestId.current && !(error instanceof DOMException && error.name === "AbortError")) setState("error"); });
     return () => controller.abort();
