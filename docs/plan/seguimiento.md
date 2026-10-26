@@ -12,8 +12,8 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 | T02 | integrada | [#4](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/4) / `5a75488` | Catálogo de 792 identidades y fixtures oficiales; `Calidad` pasó en CI. Integrada el 21 de octubre de 2026. |
 | T03 | integrada | [#5](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/5) / `1ee6bc8` | Esquema PostgreSQL, migración, catálogo repetible y pruebas de integración. `Calidad` pasó en CI. Integrada el 22 de octubre de 2026. |
 | T04 | integrada | [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6) / `59aeaef` | Extracción agrupada, parser y originales atómicos; `Calidad` pasó. Integrada el 22 de octubre de 2026. |
-| T05 | PR abierto | [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7) / `786ddc2` | Carga transaccional probada; el bootstrap en vivo recibió HTTP 500 para las 88 geografías y D1 sigue pendiente. |
-| T06 | pendiente | — | — |
+| T05 | integrada | [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7) / `2160b41` | Carga transaccional probada; `Calidad` pasó. El bootstrap en vivo recibió HTTP 500 para las 88 geografías y D1 sigue pendiente. |
+| T06 | en curso | — | Vistas canónicas, módulo decimal y pruebas PostgreSQL implementados; falta abrir PR y confirmar CI. |
 | T07 | pendiente | — | — |
 | T08 | pendiente | — | — |
 | T09 | pendiente | — | — |
