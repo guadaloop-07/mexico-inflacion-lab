@@ -33,3 +33,9 @@ repos:
         entry: uv run --locked --no-sync ruff format
         language: system
         types_or: [python, pyi]
+      - id: web-quality
+        name: Web lint
+        entry: npm run lint --prefix web
+        language: system
+        files: ^web/
+        pass_filenames: false

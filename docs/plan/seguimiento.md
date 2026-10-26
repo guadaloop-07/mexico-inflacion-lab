@@ -14,8 +14,8 @@ Estados: `pendiente`, `en curso`, `PR abierto`, `integrada`, `bloqueada`.
 | T04 | integrada | [#6](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/6) / `59aeaef` | Extracción agrupada, parser y originales atómicos; `Calidad` pasó. Integrada el 22 de octubre de 2026. |
 | T05 | integrada | [#7](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/7) / `2160b41` | Carga transaccional probada; `Calidad` pasó. El bootstrap en vivo recibió HTTP 500 para las 88 geografías y D1 sigue pendiente. |
 | T06 | integrada | [#8](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/8) / `31a0579` | Vistas canónicas y consultas decimales; `Calidad` pasó. Integrada el 26 de octubre de 2026. |
-| T07 | en curso | — | API de catálogo, resumen, historia y salud implementada; falta abrir PR y confirmar CI. |
-| T08 | pendiente | — | — |
+| T07 | integrada | [#9](https://github.com/guadaloop-07/mexico-inflacion-lab/pull/9) / `8af1a00` | API de catálogo, resumen, historia y salud; `Calidad` pasó. Integrada el 26 de octubre de 2026. |
+| T08 | en curso | — | Primera vista React/Vite nacional, pruebas y CI web implementados; falta abrir PR y confirmar CI. |
 | T09 | pendiente | — | — |
 | T10 | pendiente | — | — |
 | T11 | pendiente | — | — |

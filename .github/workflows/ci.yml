@@ -41,6 +41,12 @@ jobs:
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           persist-credentials: false
+      - name: Preparar Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: npm
+          cache-dependency-path: web/package-lock.json
       - name: Preparar uv y Python
         uses: astral-sh/setup-uv@1c37ad07a6a961277cf70c0d37d6f313000f5884 # v10.3.0
         with:
@@ -49,9 +55,15 @@ jobs:
           enable-cache: true
       - name: Instalar dependencias bloqueadas
         run: uv sync --locked
+      - name: Instalar frontend bloqueado
+        run: make setup-web
       - name: Verificar calidad
         run: make check
       - name: Ejecutar pruebas unitarias
         run: make test
       - name: Ejecutar pruebas de integración
         run: make test-db
+      - name: Ejecutar pruebas web
+        run: make test-web
+      - name: Compilar web
+        run: make build-web
