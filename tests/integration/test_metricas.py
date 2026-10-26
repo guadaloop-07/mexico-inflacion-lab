@@ -174,6 +174,12 @@ def test_ratio_and_rate_difference_keep_decimal_semantics(migrated_engine) -> No
 def test_ratio_reports_a_missing_exact_month(migrated_engine) -> None:
     with migrated_engine.begin() as connection:
         serie_id = _seed(connection, "mx", {date(2020, 1, 1): Decimal("100")})
+        connection.execute(
+            delete(observaciones).where(
+                observaciones.c.serie_id == serie_id,
+                observaciones.c.periodo == date(2020, 2, 1),
+            )
+        )
         result = razon_indices(
             connection,
             serie_id=serie_id,
